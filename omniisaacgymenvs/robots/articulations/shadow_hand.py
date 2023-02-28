@@ -52,17 +52,11 @@ class ShadowHand(Robot):
         self._usd_path = usd_path
         self._name = name
 
-        print('!' * 50)
         assets_root_path = get_assets_root_path()
         assets_user_path = assets_root_path + "/../../../../my_data"
         self._usd_path = assets_user_path + "/shadow_picking.usd"
+        print('!' * 50)
         print(self._usd_path)
-        if self._usd_path is None:
-            assets_root_path = get_assets_root_path()
-            if assets_root_path is None:
-                carb.log_error("Could not find Isaac Sim assets folder")
-            self._usd_path = assets_root_path + "/Isaac/Robots/ShadowHand/shadow_hand_instanceable.usd"
-
         self._position = torch.tensor([0.0, 0.0, 0.5]) if translation is None else translation
         self._orientation = torch.tensor([1.0, 0.0, 0.0, 0.0]) if orientation is None else orientation
             
