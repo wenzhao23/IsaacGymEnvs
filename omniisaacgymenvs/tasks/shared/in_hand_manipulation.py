@@ -106,16 +106,12 @@ class InHandManipulationTask(RLTask):
         self._stage = get_current_stage()
         self._assets_root_path = get_assets_root_path()
         hand_start_translation, pose_dy, pose_dz = self.get_hand()
-        print('*' * 100)
         self.get_object(hand_start_translation, pose_dy, pose_dz)
-        print('#' * 100)
         self.get_goal()
-
-        
 
         replicate_physics = False if self._dr_randomizer.randomize else True
         super().set_up_scene(scene, replicate_physics)
-   
+
         self._hands = self.get_hand_view(scene)
         scene.add(self._hands)
         self._objects = RigidPrimView(
@@ -134,7 +130,7 @@ class InHandManipulationTask(RLTask):
    
         if self._dr_randomizer.randomize:
             self._dr_randomizer.apply_on_startup_domain_randomization(self)
-    
+
     @abstractmethod
     def get_hand(self):
         pass
