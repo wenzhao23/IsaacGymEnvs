@@ -83,7 +83,7 @@ class ShadowHandTask(InHandManipulationTask):
             num_states = 187
 
         self._num_observations = self.num_obs_dict[self.obs_type]
-        self._num_actions = 20
+        self._num_actions = 16
         self._num_states = num_states
 
         InHandManipulationTask.__init__(self, name=name, env=env)
@@ -105,15 +105,13 @@ class ShadowHandTask(InHandManipulationTask):
             self._sim_config.parse_actor_config("shadow_hand"),
         )
         shadow_hand.set_shadow_hand_properties(stage=self._stage, shadow_hand_prim=shadow_hand.prim)
-        print(shadow_hand.prim_path)
         shadow_hand.set_motor_control_mode(stage=self._stage, shadow_hand_path=shadow_hand.prim_path)
         pose_dy, pose_dz = -0.39, 0.10
-        print('@' * 100)
         return hand_start_translation, pose_dy, pose_dz
     
     def get_hand_view(self, scene):
-        hand_view = ShadowHandView(prim_paths_expr="/World/envs/.*/shadow_hand", name="shadow_hand_view")
-        scene.add(hand_view._fingers)
+        hand_view = ShadowHandView(prim_paths_expr="/World/kuka_allegro/kuka_allegro", name="shadow_hand_view")
+        # scene.add(hand_view._fingers)
         return hand_view
 
     def get_observations(self):

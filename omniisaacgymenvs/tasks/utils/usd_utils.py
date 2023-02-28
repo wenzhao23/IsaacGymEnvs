@@ -32,13 +32,9 @@ from omni.isaac.core.utils.stage import get_current_stage
 from pxr import UsdPhysics, UsdLux
 
 def set_drive_type(prim_path, drive_type):
-    print(prim_path)
     joint_prim = get_prim_at_path(prim_path)
-    print(joint_prim)
-    print(prim_path)
     # set drive type ("angular" or "linear")
     drive = UsdPhysics.DriveAPI.Apply(joint_prim, drive_type)
-    print(prim_path)
     return drive
 
 def set_drive_target_position(drive, target_value):
